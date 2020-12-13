@@ -1,0 +1,37 @@
+/*pointers point to the address of a variable
+to define them [var-type *var-name]
+to initiate them 
+{
+	int n;
+	int *np;
+	np=&n;
+	cout<<np will print the address of n
+	cout<<*np will print value stored in address
+}
+to note that it is always a hexadecimal number
+
+refer https://www.tutorialspoint.com/cplusplus/cpp_pointers.htm */
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	string s;
+	cout<<"input a string"<<endl; cin>>s;
+	string *sPoint;
+	sPoint=&s;
+	cout<<"Pointer of string is "<<sPoint<<endl;//this is working as expected
+	for(int i=0;i<s.length();i++)
+	{	
+		char *sP=&s.at(i);//trying to assign address of each character to a pointer but it prints my original string
+		cout<<"pointer of character is "<<sP<<endl;
+	}
+	char ab='F';
+	char *point=&ab;
+	cout<<"\n\n the address of character is "<<point<<endl;//second problem occurs trying to print address of char (which should be a hexadecimal) but random printing
+	int a=50,b=51;
+	int *aPoint=&a, *bPoint=&b;
+	cout<<"\n\naddress of 'a' is "<<aPoint<<endl<<"address of 'b' is "<<bPoint<<endl;//working as expected
+		
+	
+}
