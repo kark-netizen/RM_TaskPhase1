@@ -15,7 +15,7 @@ int greatestCommonDivisor(int num1, int num2)
 int main() 
 {
     int num1,num2;
-    cout<<"input smaller number"<<endl; cin>>num1;40
+    cout<<"input smaller number"<<endl; cin>>num1;
     cout<<"input larger number"<<endl; cin>>num2;
     int gcd=abs(greatestCommonDivisor(num1,num2));//abs() function found in <cstdlib> calculates the absolute value(modulus of the number)
     cout<<"the greatest common divisor is "<<gcd;
