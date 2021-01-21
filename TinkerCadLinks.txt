@@ -1,2 +1,4 @@
 Servo Motor
 https://www.tinkercad.com/login?next=%2Fthings%2FiU7g6fBjWAe-servo-motor%2Feditel
+Bot Movement
+https://www.tinkercad.com/things/4IN2FBHKseh-omni-wheel-motor/editel
