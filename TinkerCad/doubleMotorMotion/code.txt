@@ -1,0 +1,121 @@
+int m11=A0,m12=A1,m21=A2,m22=A3;
+void setup()
+{
+  pinMode(13, OUTPUT);
+  pinMode(A0,OUTPUT);
+  pinMode(A1,OUTPUT);
+  pinMode(A2,OUTPUT);
+  pinMode(A3,OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Press C the commands to move robot");
+}
+void forward(int vel)
+{
+  	Serial.println("f");
+  	Serial.println(">>moving forward");
+  	Serial.println("...");
+	analogWrite(m11, vel);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, vel);
+  	analogWrite(m22, 0);
+}
+void backward(int vel)
+{
+  	Serial.println("b");
+  	Serial.println(">>moving backward");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, vel);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, vel);
+}
+void right(int vel)
+{
+  	Serial.println("r");
+  	Serial.println(">>turning right");
+  	Serial.println("...");
+	analogWrite(m11, vel);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, 0);
+}
+void left(int vel)
+{
+  	Serial.println("l");
+  	Serial.println(">>turning left");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, vel);
+  	analogWrite(m22, 0);
+}
+void rightR(int vel)
+{
+  	Serial.println("R");
+  	Serial.println(">>rotating right");
+  	Serial.println("...");
+	analogWrite(m11, vel);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, vel);
+}
+void leftR(int vel)
+{
+  	Serial.println("L");
+  	Serial.println(">>turning left");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, vel);
+  	analogWrite(m21, vel);
+  	analogWrite(m22, 0);
+}
+void stop()
+{
+  	Serial.println("...");
+  	Serial.println(">>stopping");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, 0);
+}
+void commands()
+{
+  Serial.println("f to move forward.\nb to move backward.\nr for right turn.\nl for left turn.\nR for right rotation.\nL for left rotation.\ns to stop");
+}
+void loop(){
+  digitalWrite(13, HIGH);
+  delay(1000); // Wait for 1000 millisecond(s)
+  digitalWrite(13, LOW);
+  delay(1000); // Wait for 1000 millisecond(s)
+  char dir; int vel;
+  if(Serial.available()){
+	 dir=Serial.read();
+  }
+  if(dir=='C'){
+    commands();
+  }
+  if(dir=='f'){
+    forward(255);
+  }
+  if(dir=='b'){
+    backward(255);
+  }
+  if(dir=='r'){
+    right(255);
+  }
+  if(dir=='l'){
+    left(255);
+  }
+  if(dir=='R'){
+    rightR(255);
+  }
+  if(dir=='L'){
+    leftR(255);
+  }
+  if(dir=='s'){
+    stop();
+  }
+  delay(1000);
+    
+}
