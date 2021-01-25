@@ -1,0 +1,119 @@
+int m11=A0,m12=A1,m21=A2,m22=A3;
+void setup()
+{
+  pinMode(13, OUTPUT);
+  pinMode(A0,OUTPUT);
+  pinMode(A1,OUTPUT);
+  pinMode(A2,OUTPUT);
+  pinMode(A3,OUTPUT);
+  Serial.begin(9600);
+}
+long distance(int triggerPin, int echoPin)
+{
+  pinMode(triggerPin, OUTPUT);  // Clear the trigger
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigger pin to HIGH state for 10 microseconds
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+  pinMode(echoPin, INPUT);
+  // Reads the echo pin, and returns the sound wave travel time in microseconds
+  return pulseIn(echoPin, HIGH);
+}
+long microsecondsToCentimeters(long microseconds) {
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the object we
+  // take half of the distance travelled.
+  return microseconds / 29 / 2;
+}
+void forward(int vel)
+{
+  	Serial.println(">>moving forward");
+  	Serial.println("...");
+	analogWrite(m11, vel);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, vel);
+  	analogWrite(m22, 0);
+}
+void backward(int vel)
+{
+  	Serial.println(">>moving backward");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, vel);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, vel);
+}
+void right(int vel)
+{
+  	Serial.println(">>turning right");
+  	Serial.println("...");
+	analogWrite(m11, vel);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, 0);
+}
+void left(int vel)
+{
+  	Serial.println("l");
+  	Serial.println(">>turning left");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, vel);
+  	analogWrite(m22, 0);
+}
+void rightR(int vel)
+{
+  	Serial.println(">>rotating right");
+  	Serial.println("...");
+	analogWrite(m11, vel);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, vel);
+}
+void leftR(int vel)
+{
+  	Serial.println(">>turning left");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, vel);
+  	analogWrite(m21, vel);
+  	analogWrite(m22, 0);
+}
+void stop()
+{
+  	Serial.println(">>stopping");
+  	Serial.println("...");
+	analogWrite(m11, 0);
+  	analogWrite(m12, 0);
+  	analogWrite(m21, 0);
+  	analogWrite(m22, 0);
+}
+
+void loop(){
+  long rightRead,leftRead;
+  rightRead=distance(2,3);
+  leftRead=distance(4,5);
+  rightRead= microsecondsToCentimeters(rightRead);
+  leftRead= microsecondsToCentimeters(leftRead);
+  int x=0;
+  if(leftRead<rightRead+1 && leftRead>rightRead-1){
+    x=1;
+  }//introduced tolerance for 1 cm
+  if(leftRead==rightRead||x==1 && leftRead>=20){
+      forward(255);
+  }//move forward
+  else if(leftRead<20&&rightRead<20){
+    stop();
+  }//stopping
+  else if(rightRead>leftRead){
+    left(255);
+  }//left turn
+  else if(leftRead>rightRead){
+    right(255);
+  }//right turn
+  delay(1000);
+    
+}
