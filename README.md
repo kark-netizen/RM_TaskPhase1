@@ -1,4 +1,7 @@
-Latest Updates: (16/05/2020)  
+Latest Updates: (23/05/2020)
+1. Progress Report 8: https://github.com/kark-netizen/RM_TaskPhase1/blob/main/ProgressReports/ProgressReport_8.pdf  
+
+(16/05/2020)  
 1. Progress Report 7: https://github.com/kark-netizen/RM_TaskPhase1/blob/main/ProgressReports/ProgressReport_7.pdf  
 2. Logistic Regression (Fixed): https://github.com/kark-netizen/RM_TaskPhase1/blob/main/Machine_Learning/Python/2_LoR(features%3D2).ipynb  
 3. Logistic Regression (Normalized features):  https://github.com/kark-netizen/RM_TaskPhase1/blob/main/Machine_Learning/Python/3_LoR(features%3D2).ipynb  
